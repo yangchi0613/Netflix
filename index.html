@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <style>
+        /* 背景圖片填滿網頁 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('backgroud-chinese.png');
+            background-size: 100%; /* 調整背景大小 (60% 原始尺寸) */
+            background-position: center top; /* 讓背景圖片置中，靠近上方 */
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        /* Netflix 標誌 */
+        .netflix-logo {
+            width: 148px;
+            height: 40px;
+            position: absolute;
+            top: 20px;
+            left: 350px;
+        }
+
+        .login-button {
+            position: absolute;
+            top: 25px;
+            right: 365px;
+            width: 60px;
+            height: 32px;
+            background-color: red;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Netflix 標誌連結 -->
+    <a href="https://www.netflix.com/tw/">
+        <img src="netflix.png" alt="Netflix Logo" class="netflix-logo">
+    </a>
+    <!--    點右上角登入進到登入網站-->
+    <a href="https://www.netflix.com/tw/login" class="login-button">登入</a>
+</body>
+</html>
