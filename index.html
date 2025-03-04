@@ -19,6 +19,7 @@
             justify-content: center;
             height: 100vh;
             color: white;
+            font-family: Arial, sans-serif;
         }
 
         /* Netflix 標誌 */
@@ -27,19 +28,19 @@
             height: 40px;
             position: absolute;
             top: 20px;
-            left: 350px;
+            left: 50px;
         }
 
         /* 登入按鈕 */
         .login-button {
             position: absolute;
-            top: 25px;
-            right: 360px;
-            width: 60px;
-            height: 32px;
+            top: 20px;
+            right: 50px;
+            width: 80px;
+            height: 36px;
             background-color: red;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 15px;
+            font-size: 16px;
             font-weight: bold;
             color: white;
             text-decoration: none;
@@ -55,22 +56,44 @@
 
         /* 伺服器忙線訊息 */
         .server-message {
-            font-size: 56px;
-            margin-top: -400px;
+            font-size: 48px;
+            margin-top: -150px;
+            text-align: center;
         }
 
         /* Loading 文字動畫 */
         .loading {
-            font-size: 30px;
-            margin-top: 10px;
+            font-size: 35px;
             font-weight: bold;
-            animation: blinking 1.5s infinite;
+            margin-top: 10px;
+            animation: blinking 1.3s infinite;
         }
 
         @keyframes blinking {
             0% { opacity: 1; }
             50% { opacity: 0.5; }
             100% { opacity: 1; }
+        }
+
+        /* 通用按鈕樣式 */
+        .custom-button {
+            width: 600px;
+            height: 100px;
+            background-color: red;
+            border-radius: 15px;
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-button:hover {
+            background-color: darkred;
         }
 
     </style>
@@ -86,11 +109,19 @@
 <a href="https://www.netflix.com/tw/login" class="login-button">登入</a>
 
 <!-- 伺服器忙線訊息 -->
-<h1 class="server-message">伺服器忙線中，請稍後</h1>
+<h1 class="server-message">伺服器忙碌中，請稍後</h1>
 
 <!-- Loading 文字 -->
 <div class="loading">Loading...</div>
 
+<!-- 前往 Netflix YouTube -->
+<a href="https://www.youtube.com/@NetflixTaiwan" class="custom-button">前往 Netflix YouTube</a>
+
+<!-- 前往 Netflix IG -->
+<a href="https://www.instagram.com/netflixtw/" class="custom-button">前往 Netflix IG</a>
+
+<!-- 前往 Netflix.shop -->
+<a href="https://www.netflix.shop/en-tw" class="custom-button">前往 Netflix Shop</a>
+
 </body>
 </html>
-
