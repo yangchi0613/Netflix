@@ -10,10 +10,15 @@
             margin: 0;
             padding: 0;
             background-image: url('backgroud-chinese.png');
-            background-size: 100%; /* 調整背景大小 (60% 原始尺寸) */
-            background-position: center top; /* 讓背景圖片置中，靠近上方 */
+            background-size: cover;
+            background-position: center top;
             background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: 100vh;
+            color: white;
         }
 
         /* Netflix 標誌 */
@@ -25,10 +30,11 @@
             left: 350px;
         }
 
+        /* 登入按鈕 */
         .login-button {
             position: absolute;
             top: 25px;
-            right: 365px;
+            right: 360px;
             width: 60px;
             height: 32px;
             background-color: red;
@@ -46,15 +52,45 @@
         .login-button:hover {
             background-color: darkred;
         }
+
+        /* 伺服器忙線訊息 */
+        .server-message {
+            font-size: 56px;
+            margin-top: -400px;
+        }
+
+        /* Loading 文字動畫 */
+        .loading {
+            font-size: 30px;
+            margin-top: 10px;
+            font-weight: bold;
+            animation: blinking 1.5s infinite;
+        }
+
+        @keyframes blinking {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Netflix 標誌連結 -->
-    <a href="https://www.netflix.com/tw/">
-        <img src="netflix.png" alt="Netflix Logo" class="netflix-logo">
-    </a>
-    <!--    點右上角登入進到登入網站-->
-    <a href="https://www.netflix.com/tw/login" class="login-button">登入</a>
+<!-- Netflix 標誌 -->
+<a href="https://www.netflix.com/tw/">
+    <img src="netflix.png" alt="Netflix Logo" class="netflix-logo">
+</a>
+
+<!-- 登入按鈕 -->
+<a href="https://www.netflix.com/tw/login" class="login-button">登入</a>
+
+<!-- 伺服器忙線訊息 -->
+<h1 class="server-message">伺服器忙線中，請稍後</h1>
+
+<!-- Loading 文字 -->
+<div class="loading">Loading...</div>
+
 </body>
 </html>
+
