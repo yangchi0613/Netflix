@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Error</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0000aa;
+            color: #ffffff;
+            font-family: 'Consolas', monospace;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .error-message {
+            position: absolute;
+            padding: 10px;
+            background-color: #0000aa;
+            border: 2px solid #ffffff;
+            box-shadow: 4px 4px 0 #000066;
+            font-size: 14px;
+            white-space: pre-line;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const errorMessages = [
+            "SYSTEM_ERROR_0x000000F4\nCRITICAL_PROCESS_DIED",
+            "SYSTEM_SERVICE_EXCEPTION\nDRIVER_IRQL_NOT_LESS_OR_EQUAL",
+            "MEMORY_MANAGEMENT\nBAD_POOL_HEADER",
+            "SYSTEM_THREAD_EXCEPTION_NOT_HANDLED\n0xC000021A",
+            "KERNEL_SECURITY_CHECK_FAILURE",
+            "PAGE_FAULT_IN_NONPAGED_AREA",
+            "DRIVER_CORRUPTED_EXPOOL\n0x000000C5",
+            "IRQL_NOT_LESS_OR_EQUAL",
+            "KMODE_EXCEPTION_NOT_HANDLED",
+            "*** STOP: 0x0000007B\n(0xFFFFF880009A9928)",
+            "BAD_SYSTEM_CONFIG_INFO\n0x00000074",
+            "DRIVER_OVERRAN_STACK_BUFFER",
+            "MANUALLY_INITIATED_CRASH",
+            "SYSTEM_SERVICE_EXCEPTION\n0x0000003B",
+            "MEMORY_MANAGEMENT_FATAL",
+            "CRITICAL_STRUCTURE_CORRUPTION",
+            "SYSTEM_THREAD_EXCEPTION",
+            "DRIVER_POWER_STATE_FAILURE",
+            "DPC_WATCHDOG_VIOLATION",
+            "NMI_HARDWARE_FAILURE"
+        ];
+
+        function createErrorMessage() {
+            const error = document.createElement('div');
+            error.className = 'error-message';
+            error.textContent = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+
+            // 隨機位置
+            error.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+            error.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+
+            error.style.animation = 'appear 0.3s forwards';
+
+            document.body.appendChild(error);
+        }
+
+        // 每隔一小段時間創建新的錯誤訊息
+        setInterval(createErrorMessage, 100);
+
+        // 滑鼠移動時也創建錯誤訊息
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.3) { // 30% 機率產生錯誤
+                const error = document.createElement('div');
+                error.className = 'error-message';
+                error.textContent = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+                error.style.left = e.clientX + 'px';
+                error.style.top = e.clientY + 'px';
+                error.style.animation = 'appear 0.3s forwards';
+                document.body.appendChild(error);
+            }
+        });
+    </script>
+</body>
+</html>

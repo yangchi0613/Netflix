@@ -95,34 +95,269 @@
             background-color: darkred;
         }
 
+        /* 影集瀏覽器樣式美化 */
+        .browser-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 32px 0 48px 0;
+            box-sizing: border-box;
+            background: rgba(0,0,0,0.0); /* 移除黑色背景 */
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .series-browser {
+            display: flex;
+            padding: 10px 0 20px 0;
+            gap: 32px;
+            justify-content: flex-start;
+            align-items: flex-end;
+            min-height: 340px;
+            overflow-x: hidden;
+            overflow-y: visible;
+            width: 100%;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            position: relative;
+            top: -120px;
+        }
+        .series-item {
+            min-width: 200px;
+            max-width: 200px;
+            flex: 0 0 200px;
+            margin: 0;
+            text-align: left;
+            background: none;
+            border-radius: 12px;
+            box-shadow: none;
+            padding: 0;
+            transition: transform 0.2s;
+            position: relative;
+        }
+        .series-item:hover {
+            transform: scale(1.08) translateY(-8px);
+            z-index: 2;
+        }
+        .series-item img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            margin-top: -100px;
+        }
+        .series-title {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            font-size: 32px;
+            width: 48px;
+            height: 80px;
+            cursor: pointer;
+            z-index: 2;
+            border-radius: 8px;
+            transition: background 0.2s, opacity 0.2s;
+            opacity: 1;
+            display: block; /* 确保箭头显示 */
+        }
+        .arrow.visible {
+            display: block;
+        }
+        .arrow:hover {
+            background: rgba(255,0,0,0.8);
+        }
+        .left-arrow {
+            left: -60px; /* 恢復到正確位置 */
+        }
+        .right-arrow {
+            right: -60px; /* 恢復到正確位置 */
+        }
+        .browser-container { position: relative; }
+        .series-browser::-webkit-scrollbar {
+            height: 10px;
+            background: transparent;
+        }
+        .series-browser::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+            border-radius: 5px;
+        }
+
+        @keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
 <!-- Netflix 標誌 -->
 <a href="https://www.netflix.com/tw/">
-    <img src="Netflix.png" alt="Netflix Logo" class="netflix-logo">
+    <img src="images/Netflix.png" alt="Netflix Logo" class="netflix-logo">
 </a>
 
 <!-- 登入按鈕 -->
 <a href="https://www.netflix.com/tw/login" class="login-button">登入</a>
 
-<!-- 伺服器忙線訊息 -->
-<h1 class="server-message">伺服器忙碌中，請稍後</h1>
+<!-- 網頁載入中... 閃爍提示 -->
+<div id="loading" style="position: absolute; top: 60px; left: 0; right: 0; margin: 0 auto; width: 220px; font-size: 1.5em; color: #fff; font-weight: bold; text-align: center; z-index: 1000; animation: blink 3s linear infinite; background: rgba(0,0,0,0.25); border-radius: 8px; padding: 8px 0;">網頁載入中...</div>
 
-<!-- Loading 文字 -->
-<div class="loading">Loading...</div>
+<!-- 影集瀏覽器（水平捲動） -->
+<div class="browser-container">
+    <h2 style="font-size:2.2em; font-weight:900; letter-spacing:2px; margin-bottom:150px; text-align:left; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.5);">Netflix 前 10 大熱門影集</h2>
+    <div style="position: relative;">
+        <button class="arrow left-arrow" id="leftArrow" onclick="scrollSeries(-1)">&#8592;</button>
+        <div class="series-browser" id="seriesBrowser">
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=1Z2RRg11Bok" style="display:block;"><img src="images/大橋頭.jpg" alt="角頭-大橋頭"></a>
+                <div class="series-title">1. 角頭-大橋頭</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=XHZYE2cJxnw" style="display:block;"><img src="images/魷魚遊戲.jpg" alt="魷魚遊戲"></a>
+                <div class="series-title">2. 魷魚遊戲</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=d4U1WcIM1E8" style="display:block;"><img src="images/進擊的巨人.jpg" alt="進擊的巨人"></a>
+                <div class="series-title">3. 進擊的巨人</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=demaoMI3NWo" style="display:block;"><img src="images/難哄.jpg" alt="難哄"></a>
+                <div class="series-title">4. 難哄</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=NFQwFXsriVg" style="display:block;"><img src="images/海賊王.jpg" alt="海賊王"></a>
+                <div class="series-title">5. 海賊王</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=mdRp_il9f-E" style="display:block;"><img src="images/周處除三害.jpg" alt="周處除三害"></a>
+                <div class="series-title">6. 周處除三害</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=LDpmTk7PwJ0" style="display:block;"><img src="images/無赦之仇.jpg" alt="無赦之仇"></a>
+                <div class="series-title">7. 無赦之仇</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=QNAEIuDf-rI" style="display:block;"><img src="images/黑白大廚.webp" alt="黑白大廚"></a>
+                <div class="series-title">8. 黑白大廚</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=-k_i6JyLFNQ" style="display:block;"><img src="images/排少.jpg" alt="排球少年"></a>
+                <div class="series-title">9. 排球少年</div>
+            </div>
+            <div class="series-item">
+                <a href="https://www.youtube.com/watch?v=F50ACq-hrd0" style="display:block;"><img src="images/藥師少女.jpg" alt="藥師少女的獨語"></a>
+                <div class="series-title">10. 藥師少女的獨語</div>
+            </div>
+        </div>
+        <button class="arrow right-arrow" id="rightArrow" onclick="scrollSeries(1)">&#8594;</button>
+    </div>
+</div>
+<!-- 新增 YouTube、Instagram、Facebook 和 Threads 圖示連結 -->
+<div style="width:100%; display:flex; justify-content:center; align-items:center; margin-top:32px; gap:16px;">
+    <a href="https://www.youtube.com/@NetflixTaiwan" target="_blank" style="display:inline-block;">
+        <img src="images/youtube.webp" alt="YouTube" style="width:48px; height:48px; vertical-align:middle; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.18); background:#fff;">
+    </a>
+    <a href="https://www.instagram.com/netflixtw/" target="_blank" style="display:inline-block;">
+        <img src="images/ig.jpg" alt="Instagram" style="width:48px; height:48px; vertical-align:middle; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.18); background:#fff;">
+    </a>
+    <a href="https://www.facebook.com/netflix" target="_blank" style="display:inline-block;">
+        <img src="images/fb.png" alt="Facebook" style="width:48px; height:48px; vertical-align:middle; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.18); background:#fff;">
+    </a>
+    <a href="https://www.threads.net/@netflix" target="_blank" style="display:inline-block;">
+        <img src="images/threads.png" alt="Threads" style="width:48px; height:48px; vertical-align:middle; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.18); background:#fff;">
+    </a>
+</div>
+<script>
+function updateArrows() {
+    const container = document.getElementById('seriesBrowser');
+    const leftArrow = document.getElementById('leftArrow');
+    const rightArrow = document.getElementById('rightArrow');
+    // 檢查是否可向左/右捲動
+    if (container.scrollLeft > 10) {
+        leftArrow.classList.add('visible');
+    } else {
+        leftArrow.classList.remove('visible');
+    }
+    if (container.scrollLeft + container.offsetWidth < container.scrollWidth - 10) {
+        rightArrow.classList.add('visible');
+    } else {
+        rightArrow.classList.remove('visible');
+    }
+}
+function scrollSeries(direction) {
+    const container = document.getElementById('seriesBrowser');
+    const item = container.querySelector('.series-item');
+    if (!item) return;
+    const scrollAmount = item.offsetWidth * 4; // 一次滑動4個
+    container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('seriesBrowser');
+    container.addEventListener('scroll', updateArrows);
+    updateArrows();
+});
+window.addEventListener('resize', updateArrows);
 
-<!-- 前往 Netflix YouTube -->
-<a href="https://www.youtube.com/@NetflixTaiwan" class="custom-button">前往 YouTube</a>
+// 新增彈窗功能
+setTimeout(() => {
+    const popup = document.createElement('div');
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.background = 'rgba(0, 0, 0, 0.8)';
+    popup.style.color = '#fff';
+    popup.style.padding = '20px';
+    popup.style.borderRadius = '12px';
+    popup.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.3)';
+    popup.style.textAlign = 'center';
+    popup.style.zIndex = '10000';
 
-<!-- 前往 Netflix IG -->
-<a href="https://www.instagram.com/netflixtw/" class="custom-button">前往 Instagram</a>
+    const message = document.createElement('p');
+    message.textContent = '免費網站，點擊前往';
+    message.style.marginBottom = '16px';
+    message.style.fontSize = '18px';
+    message.style.fontWeight = 'bold';
 
-<!-- 前往 Netflix.shop -->
-<a href="https://www.netflix.shop/en-tw" class="custom-button">前往 Shop</a>
+    const link = document.createElement('a');
+    link.href = 'bug.html';  // 改為指向 bug.html
+    link.target = '_blank';
+    link.textContent = '前往免費網站';
+    link.style.color = '#e50914';  // 改為 Netflix 紅色
+    link.style.textDecoration = 'underline';
+    link.style.fontSize = '16px';
 
-<!--前往 Netflix.維基百科-->
-<a href="https://zh.wikipedia.org/wiki/Netflix" class="custom-button">前往 維基百科</a>
+    popup.appendChild(message);
+    popup.appendChild(link);
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = '關閉';
+    closeButton.style.marginTop = '12px';
+    closeButton.style.padding = '8px 16px';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '8px';
+    closeButton.style.background = '#f00';
+    closeButton.style.color = '#fff';
+    closeButton.style.cursor = 'pointer';
+    closeButton.onclick = () => {
+        document.body.removeChild(popup);
+    };
+
+    popup.appendChild(closeButton);
+    document.body.appendChild(popup);
+}, 10000);
+</script>
+
 </body>
 </html>
